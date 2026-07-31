@@ -162,13 +162,21 @@ router.post('/pdf', upload.single('file'), async (req, res, next) => {
 
     const { title, folder_id, tags } = req.body || {};
     const id = uuid();
-    const now = new Date().toISOString();
+    const now = new Date().toISOString();     
     let extractedText = null;
     let pageCount = null;
 
+    // console.log("1. Upload received");
+
+    // console.log(req.file);
+
+    
     try {
+      // console.log("2. Starting pdf parse");
       const pdfParse = (await import('pdf-parse')).default;
       const data = await pdfParse(req.file.buffer);
+
+      // console.log("3. PDF parsed");
       extractedText = data.text?.slice(0, 20000) || null;
       pageCount = data.numpages || null;
     } catch (err) {
