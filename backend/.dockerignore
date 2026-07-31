@@ -1,0 +1,8 @@
+node_modules
+npm-debug.log
+db/vault.db
+db/vault.db-*
+uploads/*
+!uploads/.gitkeep
+.env
+.git
