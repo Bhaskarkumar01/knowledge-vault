@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply bg-paper text-inktext font-body antialiased;
+}
+
+::selection {
+  background: #C79A5F55;
+}
+
+/* Signature element: the "index card" -- every saved item is a card-catalog
+   card, complete with a perforated top edge and a brass corner stamp. */
+.index-card {
+  position: relative;
+  background: theme('colors.paper.card');
+  border: 1px solid theme('colors.paper.dark');
+  border-top: none;
+  box-shadow: theme('boxShadow.card');
+  transition: box-shadow 160ms ease, transform 160ms ease;
+}
+.index-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background-image: radial-gradient(circle at 6px 3px, theme('colors.paper.DEFAULT') 2.5px, transparent 2.6px);
+  background-size: 14px 6px;
+  background-repeat: repeat-x;
+  background-position: 4px 0;
+}
+.index-card:hover {
+  box-shadow: theme('boxShadow.cardHover');
+  transform: translateY(-2px);
+}
+
+.stamp {
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.04em;
+}
+
+.focus-ring {
+  @apply outline-none ring-2 ring-brass ring-offset-2 ring-offset-paper;
+}
+
+.scrollbar-thin::-webkit-scrollbar { width: 6px; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: theme('colors.brass.DEFAULT'); border-radius: 3px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
